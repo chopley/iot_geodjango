@@ -1,7 +1,9 @@
 asgiref==3.3.1
 Django==3.1.7
+django-leaflet==0.27.1
 djangorestframework==3.12.4
 GDAL==3.2.2
+leaflet==0.0.3
 psycopg2==2.8.6
 pytz==2021.1
 sqlparse==0.4.1
