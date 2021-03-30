@@ -19,7 +19,7 @@ from rest_framework import routers
 from sensors import views
 from django.contrib.gis.admin import OSMGeoAdmin
 from django.contrib import admin
-from sensors.views import SensorDetailView
+from sensors.views import SensorListView
 
 
 router = routers.DefaultRouter()
@@ -30,5 +30,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^sensors/', SensorDetailView.as_view(),  name='sensor-detail')
+    url(r'^sensors/', SensorListView.as_view(),  name='sensor-list')
 ]
