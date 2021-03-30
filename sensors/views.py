@@ -20,9 +20,11 @@ class SensorListView(ListView):
 
     def get_queryset(self):
         if(self.request.method == 'GET'):
-            return SensorData.objects.filter(sensor__name="Woodbury", location__isnull=False)
+            data  = SensorData.objects.filter(sensor__name="Woodbury", location__isnull=False)
         else:
-            return SensorData.objects.filter(sensor__name=self.request.POST['sensor_name'], location__isnull=False)
+            data =  SensorData.objects.filter(sensor__name=self.request.POST['sensor_name'], location__isnull=False)
+        print(data.first())
+        return data
 
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)

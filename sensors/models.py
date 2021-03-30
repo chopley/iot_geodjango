@@ -24,3 +24,9 @@ class SensorData(models.Model):
     @property
     def lat_lng(self):
         return list(getattr(self.location, 'coords', [])[::-1])
+
+    @property
+    def sensor_data_val(self):
+        return list(getattr(self.sensor_data, 'coords', [])[::-1])
+
+

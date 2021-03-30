@@ -34,12 +34,13 @@
     <body>
         <header>
             <h1>{{ City }}</h1>
-            <form action="" method="post">
+
+        </header>
+        <form action="" method="post">
                 {% csrf_token %}
                 {{ form.as_table  }}
                 <input type='submit' value='POST'/>
-            </form>
-        </header>
+        </form>
     {% leaflet_map "main" callback="map_init" %}
 
     </body>
@@ -50,10 +51,12 @@
 
         {% for e in object_list %}
             ab = {{ e.lat_lng }}
-            L.marker(ab).addTo(map);
+            sen = {{ e.sensor_data }}
+            L.marker(ab).bindTooltip(sen.toString(),{permanent: true,direction: 'right'}).addTo(map);
         {% endfor %}
-        map.setView(ab, 12)
+        map.setView(ab, 10)
 
 
     }
 </script>
+
