@@ -23,6 +23,8 @@ from sensors.views import SensorListView
 
 
 router = routers.DefaultRouter()
+router.register(r'Sensors', views.SensorViewSet)
+router.register(r'SensorData', views.SensorDataViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

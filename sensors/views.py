@@ -7,7 +7,24 @@ from django.http import HttpResponse
 from .forms import SensorForm
 from django.views.generic.edit import FormMixin
 from django.views.generic.edit import ModelFormMixin
+from sensors.serializers import SensorSerializer, SensorDataSerializer
 
+class SensorViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows sensors to be viewed or edited.
+    """
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+
+class SensorDataViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows sensorData to be viewed or edited.
+    """
+    queryset = SensorData.objects.all()
+    serializer_class = SensorDataSerializer
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class SensorListView(ListView):
