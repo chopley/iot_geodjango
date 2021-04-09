@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from datetime import datetime
 
 
 class Sensor(models.Model):
@@ -14,12 +15,14 @@ class SensorData(models.Model):
     Represents a single Sensor datapoint
     """
     sensor = models.ForeignKey(Sensor, related_name='data', on_delete=models.CASCADE,)
-    date = models.DateTimeField()
+    date = models.DateTimeField(default=datetime.now)
+    sensor_gps_time = models.CharField(max_length=30)
     # swell size in feet
     sensor_data = models.FloatField()
     location = models.PointField()
     battery_voltage_main = models.FloatField()
     battery_voltage_secondary = models.FloatField()
+    temperature = models.FloatField()
 
     @property
     def lat_lng(self):
