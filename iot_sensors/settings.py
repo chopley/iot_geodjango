@@ -95,6 +95,7 @@ WSGI_APPLICATION = 'iot_sensors.wsgi.application'
 # }}
 
 import dj_database_url
+django_heroku.settings(locals())
 DATABASES = { 'default': dj_database_url.config(conn_max_age=500) }
 DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
@@ -139,5 +140,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-django_heroku.settings(locals())
+
 
