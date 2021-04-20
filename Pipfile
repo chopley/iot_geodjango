@@ -7,6 +7,8 @@ name = "pypi"
 gunicorn = "*"
 django = "*"
 django-heroku = "*"
+djangorestframework = "*"
+django-leaflet = "*"
 
 [dev-packages]
 
