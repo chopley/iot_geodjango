@@ -1,2 +1,2 @@
-web: gunicorn iot_sensors.wsgi:application --log-file -
+web: gunicorn iot_sensors.wsgi --log-file -
 
