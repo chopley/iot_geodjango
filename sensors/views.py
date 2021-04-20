@@ -7,7 +7,7 @@ from django.http import HttpResponse
 from .forms import SensorForm
 from django.views.generic.edit import FormMixin
 from django.views.generic.edit import ModelFormMixin
-from sensors.serializers import SensorSerializer, SensorDataSerializer
+from sensors.serializers import SensorSerializer, SensorDataSerializer, SensorSerializerImei
 
 class SensorViewSet(viewsets.ModelViewSet):
     """
@@ -16,6 +16,7 @@ class SensorViewSet(viewsets.ModelViewSet):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
     permission_classes = [permissions.IsAuthenticated]
+    filterset_fields = ('imei',)
 
 
 class SensorDataViewSet(viewsets.ModelViewSet):
@@ -37,10 +38,9 @@ class SensorListView(ListView):
 
     def get_queryset(self):
         if(self.request.method == 'GET'):
-            data  = SensorData.objects.filter(sensor__name="Woodbury", location__isnull=False)
+            data  = SensorData.objects.filter(location__isnull=False).order_by('-date')[:5]
         else:
-            data =  SensorData.objects.filter(sensor__name=self.request.POST['sensor_name'], location__isnull=False)
-        print(data.first())
+            data =  SensorData.objects.filter(sensor__name=self.request.POST['sensor_name'], location__isnull=False).order_by('-date')[:5]
         return data
 
     def post(self, request, *args, **kwargs):

@@ -32,5 +32,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    url(r'^sensors/', SensorListView.as_view(),  name='sensor-list')
+    url(r'^map/', SensorListView.as_view(),  name='Map')
 ]

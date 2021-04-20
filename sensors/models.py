@@ -8,6 +8,7 @@ class Sensor(models.Model):
     """
     name = models.CharField(max_length=200, null=True, blank=True)
     imei = models.CharField(max_length=200, null=True, blank=True)
+    frequency = models.IntegerField()
 
 
 class SensorData(models.Model):
@@ -17,7 +18,6 @@ class SensorData(models.Model):
     sensor = models.ForeignKey(Sensor, related_name='data', on_delete=models.CASCADE,)
     date = models.DateTimeField(default=datetime.now)
     sensor_gps_time = models.CharField(max_length=30)
-    # swell size in feet
     sensor_data = models.FloatField()
     location = models.PointField()
     battery_voltage_main = models.FloatField()

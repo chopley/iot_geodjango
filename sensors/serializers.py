@@ -6,8 +6,12 @@ from sensors.models import SensorData, Sensor
 class SensorSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Sensor
-        fields = ['name','imei']
+        fields = ['name','imei','frequency']
 
+class SensorSerializerImei(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Sensor
+        fields = ['imei']
 
 class SensorDataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
