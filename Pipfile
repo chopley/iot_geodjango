@@ -9,6 +9,7 @@ django = "*"
 django-heroku = "*"
 djangorestframework = "*"
 django-leaflet = "*"
+django-filter = "*"
 
 [dev-packages]
 
