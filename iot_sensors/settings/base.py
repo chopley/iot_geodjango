@@ -17,8 +17,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-#for heroku
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -85,22 +83,6 @@ WSGI_APPLICATION = 'iot_sensors.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES_AVAILABLE = {
-    'default': {},
-    'tests':
- {'ENGINE': 'django.contrib.gis.db.backends.postgis',
- 'NAME': 'gis',
- 'USER': 'user001',
- 'PASSWORD': '123456789',
- 'HOST': 'localhost',
- 'PORT': '5432'
- }
-}
-
-import dj_database_url
-django_heroku.settings(locals())
-DATABASES['default'] = dj_database_url.config(conn_max_age=500)
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
 
 
 # Password validation
@@ -141,7 +123,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
+
 
 
