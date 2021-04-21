@@ -80,14 +80,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'iot_sensors.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
-
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
-
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
@@ -120,8 +112,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
 
