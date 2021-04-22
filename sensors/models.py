@@ -7,7 +7,7 @@ class Sensor(models.Model):
     Represents a Sensor
     """
     name = models.CharField(max_length=200, null=True, blank=True)
-    imei = models.CharField(max_length=200, null=True, blank=True)
+    imei = models.CharField(max_length=15, unique=True)
     frequency = models.IntegerField()
 
 
@@ -15,8 +15,7 @@ class SensorData(models.Model):
     """
     Represents a single Sensor datapoint
     """
-    sensor = models.ForeignKey(Sensor, related_name='sensor', on_delete=models.CASCADE,)
-    imei = models.CharField(max_length=200, null=True, blank=True)
+    imei_sensor = models.ForeignKey(Sensor, to_field='imei', on_delete=models.CASCADE,)
     date = models.DateTimeField(default=datetime.now)
     sensor_gps_time = models.CharField(max_length=30)
     sensor_data = models.FloatField()

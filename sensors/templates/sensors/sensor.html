@@ -1,6 +1,7 @@
 {% load static leaflet_tags%}
 
 <link rel="stylesheet" type="text/css" href="{% static 'sensors/style.css' %}">
+
 <style>
 
     .leaflet-container {  /* all maps */
@@ -26,7 +27,7 @@
 
 <html>
     <head>
-
+    <script src="https://d3js.org/d3.v3.min.js"></script>
         {% leaflet_js %}
         <title>Sensor Map</title>
 
@@ -61,10 +62,48 @@
         var average_sensor = sum_sensor / n_sensor_readings
         co2_sensor = average_sensor.toFixed(2)
         display = "CO2 (ppm) <br>".concat(co2_sensor).concat("<br>Main Battery<br>").concat(battery_1.toFixed(2)).concat("V<br>Modem Battery<br>").concat(battery_2.toFixed(2)).concat("V")
-        L.marker(ab).bindTooltip(display,{permanent: true,direction: 'right'}).addTo(map);
+        L.marker(ab)
+        .on("mouseover", onMouseOver)
+        .on("mouseout", onMouseOut)
+        .bindTooltip(display,{permanent: true,direction: 'right'}).addTo(map);
         map.setView(ab, 10)
+        }
 
-
+    function onMouseOver(e){
+        var point = map.latLngToContainerPoint(e.latlng);
+        var tooltip = d3.select(map.getContainer())
+            .append("div")
+            .attr("class", "tooltip")
+            // Calculating according to marker and tooltip size
+            .style({ left: point.x - 40 + "px", top: point.y - 80 - 41 + "px" })
+            .node();
+        getPie(tooltip, e.target.options.achieve);
+    }
+    function onMouseOut(e){
+        d3.select(map.getContainer()).select(".tooltip").remove();
+    }
+    function getPie(node, value){
+        var size = 70;
+        var arc = d3.svg.arc().outerRadius(size / 2).innerRadius(size / 3),
+            pie = d3.layout.pie().sort(null);
+        d3.select(node).append("svg")
+            .attr({ width: size, height: size })
+            .append("g")
+            .attr("transform", "translate(" + [size / 2, size / 2] + ")")
+            .call(function(s){
+                s.append("text")
+                 .text(d3.format(".2p")(value))
+                 .style("font", "12px")
+                 .attr({ "text-anchor": "middle", "alignment-baseline": "central" });
+            })
+            .selectAll("path")
+            .data(pie([value, 1 - value]))
+            .enter()
+            .append("path")
+            .attr({
+                d: arc,
+                fill: function(d,i){ return i ? "gray" : "red"; }
+            });
     }
 </script>
 
