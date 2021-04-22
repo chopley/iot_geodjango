@@ -15,7 +15,8 @@ class SensorData(models.Model):
     """
     Represents a single Sensor datapoint
     """
-    sensor = models.ForeignKey(Sensor, related_name='data', on_delete=models.CASCADE,)
+    sensor = models.ForeignKey(Sensor, related_name='sensor', on_delete=models.CASCADE,)
+    imei = models.CharField(max_length=200, null=True, blank=True)
     date = models.DateTimeField(default=datetime.now)
     sensor_gps_time = models.CharField(max_length=30)
     sensor_data = models.FloatField()

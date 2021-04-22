@@ -16,6 +16,6 @@ class SensorSerializerImei(serializers.HyperlinkedModelSerializer):
 class SensorDataSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = SensorData
-        fields = ['sensor', 'date', 'sensor_gps_time','temperature','sensor_data','location','battery_voltage_main','battery_voltage_secondary']
+        fields = ['sensor', 'imei','date', 'sensor_gps_time','temperature','sensor_data','location','battery_voltage_main','battery_voltage_secondary']
 
 
